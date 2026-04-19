@@ -1,0 +1,116 @@
+---
+// 35mm film canister — Portra 400. Click goes to /photography.
+---
+
+<a class="film" data-obj="film-canister" href="/photography" aria-label="Photography">
+  <span class="body">
+    <span class="label">
+      <span class="brand">KODAK</span>
+      <span class="stock">PORTRA 400</span>
+      <span class="iso">ISO 400 · 36 exp</span>
+    </span>
+    <span class="lip lip-top"></span>
+    <span class="lip lip-bot"></span>
+  </span>
+  <span class="spool" aria-hidden="true"></span>
+</a>
+
+<style>
+  .film {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 110px;
+    filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.55));
+    transition: transform var(--dur-short) var(--ease-out-soft);
+  }
+  .film:hover,
+  .film:focus-visible {
+    transform: translateY(-2px) rotate(0.5deg);
+  }
+
+  .body {
+    position: absolute;
+    inset: 10px 4px 4px 4px;
+    border-radius: 6px;
+    background: linear-gradient(
+      to right,
+      #1a1a1c 0%,
+      #2a2a2d 12%,
+      #0f0f11 25%,
+      #2a2a2d 55%,
+      #0f0f11 75%,
+      #1a1a1c 100%
+    );
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -6px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+  }
+
+  .lip {
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    height: 6px;
+    background: linear-gradient(to bottom, #c8c8cc, #7a7a7e);
+    box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.4);
+  }
+  .lip-top {
+    top: 0;
+    border-radius: 3px 3px 0 0;
+  }
+  .lip-bot {
+    bottom: 0;
+    border-radius: 0 0 3px 3px;
+  }
+
+  .label {
+    position: absolute;
+    inset: 18px 6px;
+    background: linear-gradient(to bottom, #c18a1e 0%, #a06d15 55%, #7e530e 100%);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 2px;
+    text-align: center;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -2px 3px rgba(0, 0, 0, 0.35);
+  }
+
+  .brand {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #1a1000;
+  }
+  .stock {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-style: italic;
+    color: #fff9ea;
+    line-height: 1;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  }
+  .iso {
+    font-family: var(--font-body);
+    font-size: 6px;
+    letter-spacing: 0.15em;
+    color: #fff9ea;
+    opacity: 0.9;
+  }
+
+  .spool {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    width: 10px;
+    height: 14px;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    background: linear-gradient(to bottom, #2a2a2d, #0f0f11);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+</style>

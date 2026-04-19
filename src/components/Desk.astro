@@ -1,0 +1,83 @@
+---
+import Medallion from './desk/Medallion.astro';
+import Keyfob from './desk/Keyfob.astro';
+import FilmCanister from './desk/FilmCanister.astro';
+import CallingCard from './desk/CallingCard.astro';
+import WaxSeal from './desk/WaxSeal.astro';
+import Stamp from './desk/Stamp.astro';
+import RecipeNotebook from './desk/RecipeNotebook.astro';
+import WorkingOnNote from './desk/WorkingOnNote.astro';
+import Watch from './desk/Watch.astro';
+import VinylRecord from './desk/VinylRecord.astro';
+import ChalkBag from './desk/ChalkBag.astro';
+import Cufflinks from './desk/Cufflinks.astro';
+---
+
+<section class="desk" data-desk aria-label="Bryan's desk">
+  <!--
+    Every object is positioned via CSS custom props (--x, --y) in % of the desk.
+    On desktop, physics overwrites transform at runtime. On mobile, these are the
+    final positions. Order here is the z-order from back to front.
+  -->
+
+  <div class="obj" style="--x: 22%; --y: 30%;"><WorkingOnNote /></div>
+  <div class="obj" style="--x: 74%; --y: 30%;"><RecipeNotebook /></div>
+
+  <div class="obj" style="--x: 45%; --y: 50%;"><CallingCard /></div>
+
+  <div class="obj" style="--x: 15%; --y: 65%;"><VinylRecord /></div>
+  <div class="obj" style="--x: 82%; --y: 62%;"><Watch /></div>
+
+  <div class="obj" style="--x: 50%; --y: 78%;"><Medallion /></div>
+
+  <div class="obj" style="--x: 30%; --y: 85%;"><Keyfob /></div>
+  <div class="obj" style="--x: 70%; --y: 85%;"><FilmCanister /></div>
+
+  <div class="obj" style="--x: 62%; --y: 40%;"><WaxSeal /></div>
+  <div class="obj" style="--x: 38%; --y: 40%;"><Stamp /></div>
+
+  <div class="obj" style="--x: 88%; --y: 82%;"><ChalkBag /></div>
+  <div class="obj" style="--x: 12%; --y: 40%;"><Cufflinks /></div>
+</section>
+
+<style>
+  .desk {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 48px);
+    overflow: hidden;
+  }
+
+  /* Static layout: centered on each object's --x/--y anchor. */
+  .obj {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    transform: translate(-50%, -50%);
+    z-index: var(--z-desk);
+    will-change: transform;
+  }
+
+  /* Mobile: switch to flow layout so nothing stacks or overflows. */
+  @media (max-width: 768px) {
+    .desk {
+      min-height: 0;
+      overflow: visible;
+      padding: 1.5rem 1rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 1rem;
+      justify-items: center;
+      align-items: center;
+    }
+    .obj {
+      position: static;
+      transform: none;
+    }
+    /* Medallion and card span both cols for emphasis. */
+    .obj:has([data-obj='medallion']),
+    .obj:has([data-obj='calling-card']) {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

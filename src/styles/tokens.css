@@ -1,0 +1,71 @@
+/*
+ * Design tokens — Vanquish-keyed palette, type scale, surfaces.
+ * Restraint over announcement. Specificity over generality.
+ */
+
+:root {
+  /* Surface greens */
+  --bg-deep-green: #15241c;
+  --bg-deep-green-2: #1e3326;
+  --bg-deep-green-3: #0e1a14;
+
+  /* Ivory — medallions, card stock, card type */
+  --ivory: #ece1c8;
+  --ivory-hi: #fff9ea;
+  --ivory-lo: #d6c9a8;
+
+  /* Saddle leather — keyfob, signet */
+  --leather-saddle: #7a5330;
+  --leather-saddle-2: #5a3a1e;
+  --leather-saddle-hi: #9a7349;
+
+  /* Oxblood / crimson — calling card border, wax */
+  --oxblood: #8b1a1a;
+  --crimson: #c13a2a;
+
+  /* Platinum — cufflinks, hairlines */
+  --platinum-hi: #f0f0f2;
+  --platinum: #b8b8bc;
+  --platinum-lo: #8a8a8e;
+
+  /* Champagne — rare accent (tertiary) */
+  --champagne: #c7b180;
+
+  /* Type */
+  --font-display: 'GFS Didot', 'Bodoni 72', 'Didot', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-hand: 'Caveat', 'Bradley Hand', cursive;
+
+  /* Scale */
+  --step--2: 0.694rem;
+  --step--1: 0.833rem;
+  --step-0: 1rem;
+  --step-1: 1.2rem;
+  --step-2: 1.44rem;
+  --step-3: 1.728rem;
+  --step-4: 2.074rem;
+  --step-5: 2.488rem;
+
+  /* Lines */
+  --hairline: 1px solid rgba(236, 225, 200, 0.16);
+  --hairline-strong: 1px solid rgba(236, 225, 200, 0.32);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-short: 200ms;
+  --dur-med: 420ms;
+  --dur-long: 760ms;
+
+  /* Z-layers */
+  --z-desk: 1;
+  --z-topbar: 10;
+  --z-drawer: 20;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-short: 0ms;
+    --dur-med: 0ms;
+    --dur-long: 0ms;
+  }
+}

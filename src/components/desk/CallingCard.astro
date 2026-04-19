@@ -1,0 +1,59 @@
+---
+// Cream calling card — links into the Journal.
+---
+
+<a class="card" data-obj="calling-card" href="/journal" aria-label="Journal">
+  <span class="line display name">Bryan Yao</span>
+  <span class="line smallcaps role">Journal</span>
+  <span class="rule" aria-hidden="true"></span>
+  <span class="line smallcaps dek">words, mostly short</span>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 220px;
+    height: 132px;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(to bottom, #fff9ea 0%, #ece1c8 100%);
+    color: #2a1f10;
+    border: 1px solid rgba(122, 83, 48, 0.35);
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.55),
+      inset 0 0 0 3px rgba(139, 26, 26, 0),
+      inset 0 0 0 4px #8b1a1a,
+      inset 0 0 0 5px rgba(139, 26, 26, 0);
+    position: relative;
+    transition: transform var(--dur-short) var(--ease-out-soft);
+  }
+  .card:hover,
+  .card:focus-visible {
+    transform: translateY(-2px);
+  }
+
+  .name {
+    font-size: var(--step-2);
+    letter-spacing: 0.02em;
+    color: #2a1f10;
+  }
+  .role {
+    color: #5a3a1e;
+    margin-top: 0.25rem;
+  }
+  .rule {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: #7a5330;
+    opacity: 0.5;
+    margin: 0.55rem 0;
+  }
+  .dek {
+    color: #7a5330;
+    font-size: 0.66rem;
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+// Paired cufflinks. Left = GitHub, right = email. Each is a small link.
+---
+
+<div class="cufflinks" data-obj="cufflinks" aria-label="Contact">
+  <a
+    class="cuff"
+    href="https://github.com/narwhalishus"
+    target="_blank"
+    rel="noopener"
+    aria-label="GitHub (opens in new tab)"
+  >
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <defs>
+        <radialGradient id="cuff-a-face" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#f0f0f2" />
+          <stop offset="100%" stop-color="#8a8a8e" />
+        </radialGradient>
+      </defs>
+      <circle cx="20" cy="20" r="18" fill="url(#cuff-a-face)" />
+      <circle cx="20" cy="20" r="14" fill="none" stroke="#5a5a5e" stroke-width="0.4" />
+      <path
+        fill="#1a1a1c"
+        transform="translate(11 11) scale(0.56)"
+        d="M16 0a16 16 0 0 0-5 31c.8.15 1.1-.35 1.1-.77v-2.7c-4.46.97-5.4-2.14-5.4-2.14-.72-1.84-1.78-2.33-1.78-2.33-1.46-1 .1-.98.1-.98 1.62.11 2.48 1.66 2.48 1.66 1.44 2.46 3.76 1.75 4.68 1.34.14-1.04.56-1.75 1.02-2.16-3.56-.4-7.3-1.78-7.3-7.9 0-1.74.63-3.17 1.64-4.3-.16-.4-.71-2.04.16-4.25 0 0 1.34-.43 4.4 1.64a15.2 15.2 0 0 1 8 0c3.06-2.07 4.4-1.64 4.4-1.64.87 2.21.32 3.85.16 4.26a6.2 6.2 0 0 1 1.64 4.28c0 6.13-3.74 7.5-7.3 7.89.58.5 1.1 1.48 1.1 2.98v4.42c0 .42.3.93 1.1.77A16 16 0 0 0 16 0Z"
+      />
+    </svg>
+  </a>
+
+  <a class="cuff" href="mailto:hello@bryanyao.com" aria-label="Email Bryan">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <defs>
+        <radialGradient id="cuff-b-face" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#f0f0f2" />
+          <stop offset="100%" stop-color="#8a8a8e" />
+        </radialGradient>
+      </defs>
+      <circle cx="20" cy="20" r="18" fill="url(#cuff-b-face)" />
+      <circle cx="20" cy="20" r="14" fill="none" stroke="#5a5a5e" stroke-width="0.4" />
+      <path
+        fill="#1a1a1c"
+        d="M20 14.5 12 19.5V14.2A1.4 1.4 0 0 1 13.4 13h13.2A1.4 1.4 0 0 1 28 14.2V19.5l-8-5Zm0 1.9 8 5V25.8A1.2 1.2 0 0 1 26.8 27H13.2A1.2 1.2 0 0 1 12 25.8V21.4l8-5Z"
+      />
+    </svg>
+  </a>
+</div>
+
+<style>
+  .cufflinks {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+  }
+  .cuff {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: transform var(--dur-short) var(--ease-out-soft);
+  }
+  .cuff:hover,
+  .cuff:focus-visible {
+    transform: translateY(-1px);
+  }
+  .cuff svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>

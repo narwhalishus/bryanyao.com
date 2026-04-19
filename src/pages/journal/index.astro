@@ -1,0 +1,84 @@
+---
+import {getCollection} from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const entries = (await getCollection('journal'))
+  .filter((e) => !e.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="Journal — Bryan Yao" description="Writing by Bryan Yao.">
+  <section class="column">
+    <h1 class="display title">Journal</h1>
+    <p class="smallcaps dek">Short pieces, mostly on things I am paying attention to.</p>
+
+    <ol class="list">
+      {
+        entries.map((e) => (
+          <li>
+            <a href={`/journal/${e.id}`}>
+              <time datetime={e.data.date.toISOString()} class="smallcaps date">
+                {e.data.date.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'})}
+              </time>
+              <span class="display entry-title">{e.data.title}</span>
+              {e.data.excerpt && <span class="excerpt">{e.data.excerpt}</span>}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .column {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  .title {
+    font-size: var(--step-5);
+    color: var(--ivory-hi);
+    margin: 0 0 0.25rem 0;
+  }
+  .dek {
+    color: var(--ivory-lo);
+    margin-bottom: 3rem;
+  }
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+  .list li {
+    border-bottom: var(--hairline);
+    padding-bottom: 1.75rem;
+  }
+  .list a {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1.25rem;
+    color: var(--ivory);
+    transition: color var(--dur-short) var(--ease-out-soft);
+  }
+  .list a:hover {
+    color: var(--ivory-hi);
+  }
+  .date {
+    color: var(--platinum);
+    white-space: nowrap;
+    align-self: baseline;
+  }
+  .entry-title {
+    font-size: var(--step-2);
+    line-height: 1.25;
+  }
+  .excerpt {
+    grid-column: 2;
+    color: var(--ivory-lo);
+    font-size: var(--step--1);
+  }
+</style>

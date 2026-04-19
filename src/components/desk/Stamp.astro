@@ -1,0 +1,56 @@
+---
+// Rubber stamp. Ambient for now — paired with the wax seal visually.
+---
+
+<figure class="stamp" data-obj="stamp" aria-hidden="true">
+  <span class="handle"></span>
+  <span class="cap"></span>
+  <span class="rim"></span>
+</figure>
+
+<style>
+  .stamp {
+    position: relative;
+    width: 52px;
+    height: 70px;
+    margin: 0;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+    pointer-events: none;
+  }
+
+  .handle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 34px;
+    border-radius: 8px 8px 4px 4px;
+    background: linear-gradient(to right, #3a2413 0%, #5a3a1e 50%, #3a2413 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 220, 180, 0.18);
+  }
+  .cap {
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 14px;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #c8c8cc 0%, #8a8a8e 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -2px 2px rgba(0, 0, 0, 0.4);
+  }
+  .rim {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 52px;
+    height: 18px;
+    border-radius: 4px 4px 3px 3px;
+    background: linear-gradient(to bottom, #3a2413, #1a0f05);
+    box-shadow: inset 0 1px 0 rgba(255, 220, 180, 0.15);
+  }
+</style>

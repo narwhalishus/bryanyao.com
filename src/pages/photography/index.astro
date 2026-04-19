@@ -1,0 +1,82 @@
+---
+import {getCollection} from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const photos = (await getCollection('photos')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Base title="Photography — Bryan Yao" description="Film photographs, mostly Portra.">
+  <section class="column">
+    <h1 class="display title">Photography</h1>
+    <p class="smallcaps dek">Film frames, mostly Portra.</p>
+
+    <ul class="gallery">
+      {
+        photos.map((p) => (
+          <li class="frame">
+            <figure>
+              <img src={p.data.src} alt={p.data.alt} loading="lazy" width="1200" height="800" />
+              <figcaption>
+                <span class="display caption-title">{p.data.title}</span>
+                <span class="smallcaps caption-meta">
+                  {p.data.stock}
+                  {p.data.location ? ` · ${p.data.location}` : ''}
+                </span>
+              </figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .column {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  .title {
+    font-size: var(--step-5);
+    color: var(--ivory-hi);
+    margin: 0 0 0.25rem 0;
+  }
+  .dek {
+    color: var(--ivory-lo);
+    margin-bottom: 3rem;
+  }
+  .gallery {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .frame figure {
+    margin: 0;
+  }
+  .frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(236, 225, 200, 0.18);
+  }
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 0.75rem;
+  }
+  .caption-title {
+    font-style: italic;
+    font-size: var(--step-1);
+    color: var(--ivory-hi);
+  }
+  .caption-meta {
+    color: var(--ivory-lo);
+  }
+</style>
