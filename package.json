@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.5",
-    "@types/matter-js": "^0.19.8",
+    "@types/matter-js": "^0.20.2",
     "eslint": "^8.57.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",

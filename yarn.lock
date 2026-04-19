@@ -879,10 +879,10 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/matter-js@^0.19.8":
-  version "0.19.8"
-  resolved "https://registry.yarnpkg.com/@types/matter-js/-/matter-js-0.19.8.tgz#ce1a7f743b8520f58cda2c5b06434a46c6731fed"
-  integrity sha512-W2ZWG58Lijv/4v768NgpeyFqqiOyslmAU7qqM1Lhz4XBoUgGtZtPz4CjcOKYtqHIak14dvPldslQhltqLTWwsw==
+"@types/matter-js@^0.20.2":
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/@types/matter-js/-/matter-js-0.20.2.tgz#f24c6e9ffd779426336d3c966f7bd2e69dceee08"
+  integrity sha512-3PPKy3QxvZ89h9+wdBV2488I1JLVs7DEpIkPvgO8JC1mUdiVSO37ZIvVctOTD7hIq8OAL2gJ3ugGSuUip6DhCw==
 
 "@types/mdast@^4.0.0":
   version "4.0.4"
