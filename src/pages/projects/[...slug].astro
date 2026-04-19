@@ -1,0 +1,92 @@
+---
+import {getCollection, render} from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const entries = (await getCollection('projects')).filter((e) => !e.data.draft);
+  return entries.map((entry) => ({params: {slug: entry.id}, props: {entry}}));
+}
+
+const {entry} = Astro.props;
+const {Content} = await render(entry);
+---
+
+<Base title={`${entry.data.title} — Builds`} description={entry.data.excerpt}>
+  <article class="column">
+    <header>
+      <p class="smallcaps kicker"><a href="/projects">Builds</a></p>
+      <h1 class="display title">{entry.data.title}</h1>
+      <time datetime={entry.data.date.toISOString()} class="smallcaps date">
+        {entry.data.date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}
+      </time>
+      {
+        (entry.data.repo || entry.data.link) && (
+          <p class="links">
+            {entry.data.repo && (
+              <a href={entry.data.repo} target="_blank" rel="noopener">
+                repo ↗
+              </a>
+            )}
+            {entry.data.link && (
+              <a href={entry.data.link} target="_blank" rel="noopener">
+                live ↗
+              </a>
+            )}
+          </p>
+        )
+      }
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .column {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  header {
+    margin-bottom: 2.5rem;
+  }
+  .kicker {
+    color: var(--platinum);
+    margin: 0 0 0.75rem 0;
+  }
+  .kicker a:hover {
+    color: var(--ivory);
+  }
+  .title {
+    font-size: var(--step-4);
+    color: var(--ivory-hi);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.15;
+  }
+  .date {
+    color: var(--ivory-lo);
+  }
+  .links {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 1rem;
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+  }
+  .links a {
+    color: var(--champagne);
+  }
+  .prose {
+    font-size: var(--step-1);
+    line-height: 1.75;
+  }
+  .prose :global(p) {
+    margin: 0 0 1.25em 0;
+  }
+  .prose :global(a) {
+    color: var(--champagne);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

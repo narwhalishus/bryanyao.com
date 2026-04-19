@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Desk from '../components/Desk.astro';
+import Drawer from '../components/Drawer.astro';
+---
+
+<Base title="Bryan Yao" description="Bryan Yao — Bay Area. Writing, building, driving.">
+  <Desk />
+  <Drawer />
+</Base>
+
+<script>
+  import {maybeBootDesk} from '../physics/responsive';
+
+  const container = document.querySelector<HTMLElement>('[data-desk]');
+  if (container) {
+    let teardown: (() => void) | null = maybeBootDesk(container);
+
+    // On viewport crossing the breakpoint, tear down / boot.
+    const mql = window.matchMedia('(min-width: 769px)');
+    mql.addEventListener('change', () => {
+      if (teardown) {
+        teardown();
+        teardown = null;
+      }
+      teardown = maybeBootDesk(container);
+    });
+  }
+</script>

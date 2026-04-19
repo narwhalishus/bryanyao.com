@@ -1,0 +1,69 @@
+---
+// Chalk bag — ambient only in v1 (no click).
+---
+
+<figure class="chalk" data-obj="chalk-bag" aria-label="Chalk bag">
+  <span class="body" aria-hidden="true"></span>
+  <span class="drawstring" aria-hidden="true"></span>
+  <span class="opening" aria-hidden="true"></span>
+</figure>
+
+<style>
+  .chalk {
+    position: relative;
+    width: 96px;
+    height: 118px;
+    margin: 0;
+    filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.5));
+    pointer-events: none;
+  }
+
+  .body {
+    position: absolute;
+    inset: 12px 6px 6px 6px;
+    border-radius: 42% 42% 38% 38% / 22% 22% 48% 48%;
+    background:
+      radial-gradient(ellipse at 35% 30%, #6a7a4f 0%, #4a5835 55%, #2a3620 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(0, 0, 0, 0.4),
+      inset 0 -10px 14px rgba(0, 0, 0, 0.4),
+      inset 0 3px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .opening {
+    position: absolute;
+    top: 8px;
+    left: 18px;
+    right: 18px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 50% 60%, #ece1c8 0%, #d6c9a8 60%, #7a6a45 100%);
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.45);
+  }
+
+  .drawstring {
+    position: absolute;
+    top: 10px;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    border-radius: 2px;
+    background: #3a2413;
+  }
+  .drawstring::before,
+  .drawstring::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3a2413;
+    top: -3px;
+  }
+  .drawstring::before {
+    left: -6px;
+  }
+  .drawstring::after {
+    right: -6px;
+  }
+</style>

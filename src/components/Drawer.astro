@@ -1,0 +1,258 @@
+---
+// In-page drawer for short content (watch, vinyl, wax seal, working-on, recipes).
+// URL-synced via ?drawer=<name>. All drawers rendered server-side; client script
+// reveals the matching one.
+---
+
+<aside class="drawer" data-drawer-root hidden aria-hidden="true">
+  <button
+    class="scrim"
+    data-drawer-close
+    aria-label="Close drawer"
+    tabindex="-1"
+  ></button>
+
+  <div class="panel" role="dialog" aria-modal="false" aria-labelledby="drawer-title">
+    <header class="head">
+      <h2 id="drawer-title" class="display" data-drawer-title>—</h2>
+      <button class="close" data-drawer-close aria-label="Close">&times;</button>
+    </header>
+
+    <div class="content" data-drawer-content></div>
+  </div>
+
+  <!-- Per-drawer content templates live outside the content slot so swapping doesn't erase them. -->
+  <template data-drawer-id="about">
+    <p class="body">
+      <span class="smallcaps">Hello.</span> I live in the Bay Area. I write,
+      build small things, and drive a stick-shift Miata. This site is a desk;
+      everything on it is an object I own.
+    </p>
+    <p class="body">
+      Mail gets to me at <a href="mailto:hello@bryanyao.com">hello@bryanyao.com</a>.
+    </p>
+  </template>
+
+  <template data-drawer-id="watch">
+    <p class="body">
+      <strong class="display">SBGA227 · Grand Seiko Spring Drive</strong><br />
+      Zaratsu-polished stainless case. Snowflake-adjacent dial finish.
+      One glide-motion seconds hand that kills every quartz watch near it on the subway.
+    </p>
+    <p class="smallcaps">Currently set to: Pacific</p>
+  </template>
+
+  <template data-drawer-id="vinyl">
+    <p class="body">
+      <strong class="display">Laufey — <em>Bewitched</em></strong><br />
+      2023, AWAL. Side A on most weekends. Vinyl ritual only — never streamed
+      in the apartment.
+    </p>
+  </template>
+
+  <template data-drawer-id="working-on">
+    <ul class="list">
+      <li>Rewriting this site — Astro + Matter.js.</li>
+      <li>Sending the SBGA227 in for regulation.</li>
+      <li>Two essays: one on small things, one on the MX-5 35th.</li>
+    </ul>
+  </template>
+
+  <template data-drawer-id="recipes">
+    <p class="body">
+      A running ledger. Tomato-brown-butter pasta, cast-iron ribeye with
+      rosemary bath, proper Negroni ratios. Will live here soon — kept
+      offline for now.
+    </p>
+  </template>
+</aside>
+
+<script>
+  type DrawerId = string;
+
+  const root = document.querySelector<HTMLElement>('[data-drawer-root]');
+  const panel = document.querySelector<HTMLElement>('.drawer .panel');
+  const titleEl = document.querySelector<HTMLElement>('[data-drawer-title]');
+  const contentEl = document.querySelector<HTMLElement>('[data-drawer-content]');
+  const templates = new Map<string, HTMLTemplateElement>();
+  document.querySelectorAll<HTMLTemplateElement>('[data-drawer-id]').forEach((t) => {
+    const id = t.getAttribute('data-drawer-id');
+    if (id) templates.set(id, t);
+  });
+
+  const TITLES: Record<string, string> = {
+    about: 'About',
+    watch: 'Watch',
+    vinyl: 'Now playing',
+    'working-on': 'Working on',
+    recipes: 'Recipes',
+  };
+
+  let lastFocused: HTMLElement | null = null;
+
+  const openDrawer = (id: DrawerId) => {
+    if (!root || !panel || !titleEl || !contentEl) return;
+    const tpl = templates.get(id);
+    if (!tpl) return;
+
+    lastFocused = document.activeElement as HTMLElement;
+    titleEl.textContent = TITLES[id] ?? id;
+
+    contentEl.replaceChildren(tpl.content.cloneNode(true));
+    root.hidden = false;
+    root.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => root.classList.add('open'));
+    panel.focus();
+  };
+
+  const closeDrawer = () => {
+    if (!root) return;
+    root.classList.remove('open');
+    root.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    // Remove the query param without adding a history entry.
+    const url = new URL(window.location.href);
+    if (url.searchParams.has('drawer')) {
+      url.searchParams.delete('drawer');
+      window.history.replaceState({}, '', url.toString());
+    }
+    // Wait for transition then fully hide.
+    window.setTimeout(() => {
+      if (!root.classList.contains('open')) root.hidden = true;
+    }, 420);
+    lastFocused?.focus();
+  };
+
+  // Open from any element carrying data-drawer.
+  document.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement | null;
+    const trigger = t?.closest<HTMLElement>('[data-drawer]');
+    if (!trigger) return;
+
+    // Respect drag-vs-click guard set by physics input handler.
+    if (trigger.dataset.dragging === '1') return;
+
+    const id = trigger.getAttribute('data-drawer');
+    if (!id) return;
+    e.preventDefault();
+    const url = new URL(window.location.href);
+    url.searchParams.set('drawer', id);
+    window.history.replaceState({}, '', url.toString());
+    openDrawer(id);
+  });
+
+  // Close handlers.
+  document.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement | null;
+    if (t?.closest('[data-drawer-close]')) closeDrawer();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && root?.classList.contains('open')) closeDrawer();
+  });
+
+  // Open from URL on first load.
+  const initial = new URL(window.location.href).searchParams.get('drawer');
+  if (initial) openDrawer(initial);
+</script>
+
+<style>
+  .drawer {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-drawer);
+    pointer-events: none;
+  }
+  .drawer.open {
+    pointer-events: auto;
+  }
+
+  .scrim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 26, 20, 0);
+    transition: background var(--dur-med) var(--ease-out-soft);
+    cursor: default;
+  }
+  .drawer.open .scrim {
+    background: rgba(14, 26, 20, 0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  .panel {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    bottom: 0;
+    width: min(420px, 92vw);
+    padding: 2rem 1.75rem;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #1e3326 0%, #15241c 100%);
+    color: var(--ivory);
+    border-left: var(--hairline-strong);
+    box-shadow: -24px 0 40px rgba(0, 0, 0, 0.5);
+    transform: translateX(110%);
+    transition: transform var(--dur-med) var(--ease-out-soft);
+  }
+  .drawer.open .panel {
+    transform: translateX(0);
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: var(--hairline);
+  }
+  .head h2 {
+    margin: 0;
+    font-size: var(--step-3);
+    color: var(--ivory-hi);
+  }
+  .close {
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--platinum);
+    transition: color var(--dur-short) var(--ease-out-soft);
+  }
+  .close:hover {
+    color: var(--platinum-hi);
+  }
+
+  .content .body {
+    font-size: var(--step-0);
+    line-height: 1.65;
+    margin: 0 0 1rem 0;
+    color: var(--ivory);
+  }
+  .content .body em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ivory-hi);
+  }
+  .content .body a {
+    color: var(--champagne);
+    text-decoration: underline;
+    text-decoration-color: rgba(199, 177, 128, 0.45);
+    text-underline-offset: 3px;
+  }
+  .content .list {
+    margin: 0;
+    padding-left: 1rem;
+    font-size: var(--step-0);
+    line-height: 1.75;
+  }
+
+  @media (max-width: 640px) {
+    .panel {
+      top: 88px;
+      width: 100%;
+    }
+  }
+</style>

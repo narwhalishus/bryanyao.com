@@ -1,0 +1,80 @@
+---
+// Grand Seiko SBGA227 placeholder. Opens a "watch" drawer with date/location.
+// Dial is a restrained stand-in — not a detailed SBGA227 rendering.
+---
+
+<button class="watch" data-obj="watch" data-drawer="watch" aria-label="Grand Seiko SBGA227">
+  <svg viewBox="0 0 160 160" aria-hidden="true">
+    <defs>
+      <radialGradient id="case" cx="50%" cy="45%" r="55%">
+        <stop offset="0%" stop-color="#f0f0f2" />
+        <stop offset="55%" stop-color="#b8b8bc" />
+        <stop offset="100%" stop-color="#6a6a6e" />
+      </radialGradient>
+      <radialGradient id="dial" cx="50%" cy="45%" r="70%">
+        <stop offset="0%" stop-color="#0e1a14" />
+        <stop offset="70%" stop-color="#15241c" />
+        <stop offset="100%" stop-color="#040806" />
+      </radialGradient>
+    </defs>
+
+    <!-- case -->
+    <circle cx="80" cy="80" r="72" fill="url(#case)" />
+    <circle cx="80" cy="80" r="66" fill="#2a2a2d" />
+    <!-- dial -->
+    <circle cx="80" cy="80" r="62" fill="url(#dial)" />
+
+    <!-- hour markers (12 of them) -->
+    <g stroke="#ece1c8" stroke-width="1.8" stroke-linecap="round">
+      <line x1="80" y1="24" x2="80" y2="32" />
+      <line x1="108" y1="29.5" x2="104" y2="36.5" />
+      <line x1="131" y1="52" x2="124" y2="56" />
+      <line x1="136" y1="80" x2="128" y2="80" />
+      <line x1="131" y1="108" x2="124" y2="104" />
+      <line x1="108" y1="131" x2="104" y2="124" />
+      <line x1="80" y1="136" x2="80" y2="128" />
+      <line x1="52" y1="131" x2="56" y2="124" />
+      <line x1="29" y1="108" x2="36" y2="104" />
+      <line x1="24" y1="80" x2="32" y2="80" />
+      <line x1="29" y1="52" x2="36" y2="56" />
+      <line x1="52" y1="29.5" x2="56" y2="36.5" />
+    </g>
+
+    <!-- GS logo block -->
+    <text x="80" y="62" text-anchor="middle" font-family="GFS Didot, Georgia, serif" font-size="6" letter-spacing="2.5" fill="#ece1c8">GS</text>
+    <text x="80" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="3.4" letter-spacing="1.6" fill="#ece1c8" opacity="0.75">Spring Drive</text>
+
+    <!-- date window -->
+    <rect x="108" y="76" width="14" height="9" fill="#ece1c8" stroke="#6a6a6e" stroke-width="0.4" />
+    <text x="115" y="83" text-anchor="middle" font-family="Inter, sans-serif" font-size="6" fill="#15241c">17</text>
+
+    <!-- hands: hour, minute, seconds (GS-style blued seconds) -->
+    <line x1="80" y1="80" x2="80" y2="46" stroke="#ece1c8" stroke-width="3" stroke-linecap="round" />
+    <line x1="80" y1="80" x2="108" y2="80" stroke="#ece1c8" stroke-width="2" stroke-linecap="round" />
+    <line x1="80" y1="80" x2="80" y2="36" stroke="#3055a5" stroke-width="1" stroke-linecap="round" />
+
+    <circle cx="80" cy="80" r="2.4" fill="#ece1c8" />
+
+    <!-- crown -->
+    <rect x="143" y="74" width="9" height="12" rx="1.5" fill="url(#case)" stroke="#4a4a4e" stroke-width="0.4" />
+  </svg>
+</button>
+
+<style>
+  .watch {
+    width: 148px;
+    height: 148px;
+    border-radius: 50%;
+    filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.55));
+    transition: transform var(--dur-short) var(--ease-out-soft);
+  }
+  .watch:hover,
+  .watch:focus-visible {
+    transform: scale(1.03);
+  }
+  .watch svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>
