@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title='Listening — Bryan Yao'
+  description='What Bryan is listening to — vinyl, shows, and the occasional stream.'
+>
+  <section class='column'>
+    <h1 class='display title'>Listening</h1>
+    <p class='smallcaps dek'>Vinyl first. The rest catches up.</p>
+
+    <div class='body'>
+      <p>
+        <strong class='display'
+          >Laufey — <em>Bewitched</em></strong
+        ><br />
+        2023, AWAL. Side A on most weekends. Kept as a vinyl ritual only —
+        never streamed in the apartment, which keeps the needle doing real
+        work and the record on the turntable until Monday.
+      </p>
+      <p>
+        The apartment has one rule about music: if it's here, it plays on the
+        record player. Streams are for commutes and gyms. Concerts and shows
+        I go to get logged here after the fact.
+      </p>
+      <p class='smallcaps foot'>
+        On deck: Billie Holiday, Norah Jones' <em>Come Away With Me</em>, a
+        long-overdue first pressing of Kind of Blue.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .column {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  .title {
+    font-size: var(--step-5);
+    color: var(--ivory-hi);
+    margin: 0 0 0.25rem 0;
+  }
+  .dek {
+    color: var(--ivory-lo);
+    margin-bottom: 3rem;
+  }
+  .body p {
+    font-size: var(--step-0);
+    line-height: 1.7;
+    margin: 0 0 1.5rem 0;
+    color: var(--ivory);
+  }
+  .body em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ivory-hi);
+  }
+  .body .foot {
+    color: var(--ivory-lo);
+    letter-spacing: 0.12em;
+    font-size: var(--step--1);
+    text-transform: none;
+  }
+  .body .foot em {
+    text-transform: none;
+    letter-spacing: 0;
+  }
+</style>

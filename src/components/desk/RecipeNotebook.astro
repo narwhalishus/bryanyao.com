@@ -1,23 +1,24 @@
 ---
-// Leather recipe notebook. Opens a "recipes" drawer.
+// Leather recipe notebook. Links to /recipes.
 ---
 
-<button
-  class="notebook"
-  data-obj="recipe-notebook"
-  data-drawer="recipes"
-  aria-label="Recipe notebook"
+<a
+  class='notebook'
+  href='/recipes'
+  data-obj='recipe-notebook'
+  aria-label='Recipes'
 >
-  <span class="cover" aria-hidden="true">
-    <span class="band"></span>
-    <span class="title display">Recipes</span>
-    <span class="sub smallcaps">a running ledger</span>
-    <span class="corner"></span>
+  <span class='cover' aria-hidden='true'>
+    <span class='band'></span>
+    <span class='title display'>Recipes</span>
+    <span class='sub smallcaps'>a running ledger</span>
+    <span class='corner'></span>
   </span>
-</button>
+</a>
 
 <style>
   .notebook {
+    display: inline-block;
     width: 128px;
     height: 170px;
     filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.5));
@@ -83,5 +84,15 @@
     background:
       linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.5) 50%);
     border-radius: 0 4px 0 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .notebook {
+      transition: none;
+    }
+    .notebook:hover,
+    .notebook:focus-visible {
+      transform: none;
+    }
   }
 </style>

@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title='About — Bryan Yao'
+  description='Bryan Yao — Bay Area. Writing, building, driving a stick-shift Miata.'
+>
+  <section class='column'>
+    <h1 class='display title'>About</h1>
+    <p class='smallcaps dek'>The short version.</p>
+
+    <div class='body'>
+      <p>
+        <span class='smallcaps'>Hello.</span> I live in the Bay Area. I write, build
+        small things, and drive a stick-shift Miata. This site is a desk;
+        everything on it is an object I own, or would like to.
+      </p>
+      <p>
+        I pay attention to a few things closely — film grain, watch movements,
+        how a leather keyfob wears in, the exact ratio in a Negroni — and most
+        things loosely. The work I keep on this site reflects the former.
+      </p>
+      <p>
+        Mail gets to me at
+        <a href='mailto:hello@bryanyao.com'>hello@bryanyao.com</a>. I read
+        everything and answer most.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .column {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  .title {
+    font-size: var(--step-5);
+    color: var(--ivory-hi);
+    margin: 0 0 0.25rem 0;
+  }
+  .dek {
+    color: var(--ivory-lo);
+    margin-bottom: 3rem;
+  }
+  .body p {
+    font-size: var(--step-0);
+    line-height: 1.7;
+    margin: 0 0 1.25rem 0;
+    color: var(--ivory);
+  }
+  .body a {
+    color: var(--champagne);
+    text-decoration: underline;
+    text-decoration-color: rgba(199, 177, 128, 0.45);
+    text-underline-offset: 3px;
+  }
+</style>

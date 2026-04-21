@@ -22,48 +22,21 @@
   </div>
 
   <!-- Per-drawer content templates live outside the content slot so swapping doesn't erase them. -->
-  <template data-drawer-id="about">
-    <p class="body">
-      <span class="smallcaps">Hello.</span> I live in the Bay Area. I write,
-      build small things, and drive a stick-shift Miata. This site is a desk;
-      everything on it is an object I own.
-    </p>
-    <p class="body">
-      Mail gets to me at <a href="mailto:hello@bryanyao.com">hello@bryanyao.com</a>.
-    </p>
-  </template>
-
-  <template data-drawer-id="watch">
-    <p class="body">
-      <strong class="display">SBGA227 · Grand Seiko Spring Drive</strong><br />
+  <template data-drawer-id='watch'>
+    <p class='body'>
+      <strong class='display'>SBGA227 · Grand Seiko Spring Drive</strong><br />
       Zaratsu-polished stainless case. Snowflake-adjacent dial finish.
       One glide-motion seconds hand that kills every quartz watch near it on the subway.
     </p>
-    <p class="smallcaps">Currently set to: Pacific</p>
+    <p class='smallcaps'>Currently set to: Pacific</p>
   </template>
 
-  <template data-drawer-id="vinyl">
-    <p class="body">
-      <strong class="display">Laufey — <em>Bewitched</em></strong><br />
-      2023, AWAL. Side A on most weekends. Vinyl ritual only — never streamed
-      in the apartment.
-    </p>
-  </template>
-
-  <template data-drawer-id="working-on">
-    <ul class="list">
+  <template data-drawer-id='working-on'>
+    <ul class='list'>
       <li>Rewriting this site — Astro + Matter.js.</li>
       <li>Sending the SBGA227 in for regulation.</li>
       <li>Two essays: one on small things, one on the MX-5 35th.</li>
     </ul>
-  </template>
-
-  <template data-drawer-id="recipes">
-    <p class="body">
-      A running ledger. Tomato-brown-butter pasta, cast-iron ribeye with
-      rosemary bath, proper Negroni ratios. Will live here soon — kept
-      offline for now.
-    </p>
   </template>
 </aside>
 
@@ -81,11 +54,8 @@
   });
 
   const TITLES: Record<string, string> = {
-    about: 'About',
     watch: 'Watch',
-    vinyl: 'Now playing',
     'working-on': 'Working on',
-    recipes: 'Recipes',
   };
 
   let lastFocused: HTMLElement | null = null;

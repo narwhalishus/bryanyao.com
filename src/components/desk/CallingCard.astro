@@ -56,4 +56,14 @@
     color: #7a5330;
     font-size: 0.66rem;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: none;
+    }
+    .card:hover,
+    .card:focus-visible {
+      transform: none;
+    }
+  }
 </style>

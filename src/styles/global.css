@@ -84,3 +84,14 @@ button {
   background: var(--champagne);
   color: var(--bg-deep-green-3);
 }
+
+/* When physics owns transform on .obj elements, neutralize component-scoped
+   hover transforms and transitions so they don't fight the RAF writer. */
+body.physics-active [data-desk] .obj,
+body.physics-active [data-desk] .obj * {
+  transition: none !important;
+}
+body.physics-active [data-desk] .obj:hover,
+body.physics-active [data-desk] .obj *:hover {
+  transform: none !important;
+}

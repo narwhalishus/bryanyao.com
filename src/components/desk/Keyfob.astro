@@ -89,4 +89,14 @@
     letter-spacing: 0.04em;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .keyfob {
+      transition: none;
+    }
+    .keyfob:hover,
+    .keyfob:focus-visible {
+      transform: none;
+    }
+  }
 </style>

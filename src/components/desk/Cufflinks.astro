@@ -67,4 +67,14 @@
     height: 100%;
     display: block;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cuff {
+      transition: none;
+    }
+    .cuff:hover,
+    .cuff:focus-visible {
+      transform: none;
+    }
+  }
 </style>
