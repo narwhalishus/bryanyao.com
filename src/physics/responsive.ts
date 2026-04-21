@@ -23,9 +23,12 @@ export function maybeBootDesk(container: HTMLElement): (() => void) | null {
   };
   rafId = requestAnimationFrame(loop);
 
+  document.body.classList.add('physics-active');
+
   return () => {
     cancelAnimationFrame(rafId);
     detachInput();
     ctx.stop();
+    document.body.classList.remove('physics-active');
   };
 }

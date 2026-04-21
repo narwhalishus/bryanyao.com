@@ -77,4 +77,14 @@
     height: 100%;
     display: block;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .watch {
+      transition: none;
+    }
+    .watch:hover,
+    .watch:focus-visible {
+      transform: none;
+    }
+  }
 </style>

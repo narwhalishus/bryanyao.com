@@ -56,6 +56,12 @@ import Cufflinks from './desk/Cufflinks.astro';
     transform: translate(-50%, -50%);
     z-index: var(--z-desk);
     will-change: transform;
+    user-select: none;
+    -webkit-user-drag: none;
+    touch-action: none;
+  }
+  .obj * {
+    -webkit-user-drag: none;
   }
 
   /* Mobile: switch to flow layout so nothing stacks or overflows. */
