@@ -114,11 +114,18 @@ export function attachInput(container: HTMLElement, bound: BoundObject[]) {
     }
   };
 
+  // Anchors within the desk have draggable=true by default, which triggers
+  // the browser's native URL drag and cancels our pointer stream mid-drag.
+  const onDragStart = (e: DragEvent) => {
+    if ((e.target as HTMLElement | null)?.closest('.obj')) e.preventDefault();
+  };
+
   container.addEventListener('pointerdown', onPointerDown);
   window.addEventListener('pointermove', onPointerMove);
   window.addEventListener('pointerup', onPointerUp);
   window.addEventListener('pointercancel', onPointerUp);
   container.addEventListener('click', onClickCapture, true);
+  container.addEventListener('dragstart', onDragStart);
 
   return () => {
     container.removeEventListener('pointerdown', onPointerDown);
@@ -126,5 +133,6 @@ export function attachInput(container: HTMLElement, bound: BoundObject[]) {
     window.removeEventListener('pointerup', onPointerUp);
     window.removeEventListener('pointercancel', onPointerUp);
     container.removeEventListener('click', onClickCapture, true);
+    container.removeEventListener('dragstart', onDragStart);
   };
 }
