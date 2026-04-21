@@ -91,7 +91,6 @@ body.physics-active [data-desk] .obj,
 body.physics-active [data-desk] .obj * {
   transition: none !important;
 }
-body.physics-active [data-desk] .obj:hover,
 body.physics-active [data-desk] .obj *:hover {
   transform: none !important;
 }
