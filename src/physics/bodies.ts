@@ -57,7 +57,7 @@ export function buildBodies(container: HTMLElement, world: Matter.World): BoundO
     wrapper.style.top = '0';
     wrapper.style.transform = `translate(${cx - rect.width / 2}px, ${cy - rect.height / 2}px)`;
 
-    const opts: Matter.IBodyDefinition = {
+    const opts: Matter.IChamferableBodyDefinition = {
       density: spec.density ?? 0.002,
       frictionAir: spec.frictionAir ?? 0.08,
       frictionStatic: 0.2,
