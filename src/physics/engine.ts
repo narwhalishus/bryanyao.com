@@ -62,7 +62,7 @@ export function rebuildWalls(ctx: PhysicsContext) {
   Matter.World.remove(ctx.world, ctx.walls);
   ctx.walls.length = 0;
   const t = 200;
-  const opts: Matter.IBodyDefinition = {
+  const opts: Matter.IChamferableBodyDefinition = {
     isStatic: true,
     restitution: 0.25,
     friction: 0.02,
