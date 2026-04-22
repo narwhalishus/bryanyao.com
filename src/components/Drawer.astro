@@ -38,6 +38,20 @@
       <li>Two essays: one on small things, one on the MX-5 35th.</li>
     </ul>
   </template>
+
+  <template data-drawer-id='wax-seal'>
+    <p class='body'>
+      Bay Area. I write, build small things, and drive a stick-shift Miata.
+      Most of what I keep here is an object I own, or would like to.
+    </p>
+    <p class='body'>
+      Mail reaches me at
+      <a href='mailto:hello@bryanyao.com'>hello@bryanyao.com</a>.
+    </p>
+    <p class='body'>
+      <a href='/about'>Read the full about page →</a>
+    </p>
+  </template>
 </aside>
 
 <script>
@@ -56,6 +70,7 @@
   const TITLES: Record<string, string> = {
     watch: 'Watch',
     'working-on': 'Working on',
+    'wax-seal': 'About',
   };
 
   let lastFocused: HTMLElement | null = null;
