@@ -1,11 +1,109 @@
 ---
-// Rubber stamp. Ambient for now — paired with the wax seal visually.
+// Rubber stamp. Ambient — paired with the wax seal visually.
+// Single SVG so physics (which applies transform to the .obj wrapper) can
+// rotate freely without inner-element positioning transforms fighting it.
 ---
 
-<figure class="stamp" data-obj="stamp" aria-hidden="true">
-  <span class="handle"></span>
-  <span class="cap"></span>
-  <span class="rim"></span>
+<figure class='stamp' data-obj='stamp' aria-hidden='true'>
+  <svg viewBox='0 0 52 70' aria-hidden='true'>
+    <defs>
+      <linearGradient id='stamp-handle' x1='0' x2='1' y1='0' y2='0'>
+        <stop offset='0%' stop-color='#3a2413' />
+        <stop offset='45%' stop-color='#7a5130' />
+        <stop offset='55%' stop-color='#7a5130' />
+        <stop offset='100%' stop-color='#2a1808' />
+      </linearGradient>
+      <linearGradient id='stamp-ferrule' x1='0' x2='0' y1='0' y2='1'>
+        <stop offset='0%' stop-color='#d8d8dc' />
+        <stop offset='35%' stop-color='#a8a8ac' />
+        <stop offset='65%' stop-color='#6c6c70' />
+        <stop offset='100%' stop-color='#9a9a9e' />
+      </linearGradient>
+      <linearGradient id='stamp-base' x1='0' x2='0' y1='0' y2='1'>
+        <stop offset='0%' stop-color='#3a0a0a' />
+        <stop offset='60%' stop-color='#2a0808' />
+        <stop offset='100%' stop-color='#160404' />
+      </linearGradient>
+    </defs>
+
+    <!-- wood handle -->
+    <rect
+      x='17'
+      y='2'
+      width='18'
+      height='30'
+      rx='6'
+      ry='6'
+      fill='url(#stamp-handle)'
+    />
+    <!-- grain highlight -->
+    <path
+      d='M20 6 Q26 10 20 16 Q26 22 22 28'
+      stroke='rgba(255, 220, 180, 0.12)'
+      stroke-width='0.6'
+      fill='none'
+      stroke-linecap='round'
+    />
+    <!-- handle top highlight -->
+    <ellipse cx='26' cy='3.5' rx='7' ry='1.2' fill='rgba(255,240,210,0.22)' />
+
+    <!-- metal ferrule -->
+    <rect
+      x='8'
+      y='30'
+      width='36'
+      height='16'
+      rx='2.5'
+      ry='2.5'
+      fill='url(#stamp-ferrule)'
+    />
+    <!-- ferrule top rim -->
+    <rect
+      x='8'
+      y='30'
+      width='36'
+      height='1.5'
+      rx='0.8'
+      fill='rgba(255,255,255,0.55)'
+    />
+    <!-- ferrule bottom shadow -->
+    <rect
+      x='8'
+      y='44'
+      width='36'
+      height='2'
+      rx='0.8'
+      fill='rgba(0,0,0,0.45)'
+    />
+
+    <!-- rubber base -->
+    <rect
+      x='5'
+      y='46'
+      width='42'
+      height='22'
+      rx='2'
+      ry='2'
+      fill='url(#stamp-base)'
+    />
+    <!-- rubber top edge highlight -->
+    <rect
+      x='5'
+      y='46'
+      width='42'
+      height='1'
+      fill='rgba(255,200,200,0.10)'
+    />
+    <!-- pressing surface line -->
+    <line
+      x1='7'
+      y1='66'
+      x2='45'
+      y2='66'
+      stroke='rgba(0,0,0,0.55)'
+      stroke-width='0.8'
+    />
+  </svg>
 </figure>
 
 <style>
@@ -16,40 +114,9 @@
     margin: 0;
     filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
   }
-
-  .handle {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 18px;
-    height: 34px;
-    border-radius: 8px 8px 4px 4px;
-    background: linear-gradient(to right, #3a2413 0%, #5a3a1e 50%, #3a2413 100%);
-    box-shadow: inset 0 1px 0 rgba(255, 220, 180, 0.18);
-  }
-  .cap {
-    position: absolute;
-    top: 28px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 36px;
-    height: 14px;
-    border-radius: 4px;
-    background: linear-gradient(to bottom, #c8c8cc 0%, #8a8a8e 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.6),
-      inset 0 -2px 2px rgba(0, 0, 0, 0.4);
-  }
-  .rim {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 52px;
-    height: 18px;
-    border-radius: 4px 4px 3px 3px;
-    background: linear-gradient(to bottom, #3a2413, #1a0f05);
-    box-shadow: inset 0 1px 0 rgba(255, 220, 180, 0.15);
+  .stamp svg {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 </style>
