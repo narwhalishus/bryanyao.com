@@ -55,7 +55,11 @@ export function attachInput(container: HTMLElement, bound: BoundObject[]) {
       moved: false,
     };
 
-    obj.el.setPointerCapture?.(e.pointerId);
+    // Note: pointer capture is deliberately *not* set here. Capturing on the
+    // .obj wrapper would retarget the synthesized click to the wrapper div,
+    // skipping the inner <a>/<button>'s default action — so a pure click on
+    // an anchor-backed desk object would fail to navigate. Capture is set
+    // lazily in onPointerMove once the pointer crosses the drag threshold.
     Matter.Body.setStatic(obj.body, false);
   };
 
@@ -70,6 +74,16 @@ export function attachInput(container: HTMLElement, bound: BoundObject[]) {
 
     if (!drag.moved && Math.abs(dx) + Math.abs(dy) > DRAG_THRESHOLD_PX) {
       drag.moved = true;
+      // Now that we know this is a drag, capture the pointer so the stream
+      // continues even if the pointer leaves the element's visible rect.
+      // setPointerCapture can throw if the pointer is not active (e.g. in
+      // synthetic-event test harnesses); losing capture would degrade drag
+      // smoothness but not break it, so swallow the error.
+      try {
+        drag.obj.el.setPointerCapture?.(e.pointerId);
+      } catch {
+        /* noop */
+      }
       // Mark so the drawer/link handler knows to ignore the synthesized click.
       const tag = drag.obj.el.querySelector<HTMLElement>('[data-obj]');
       if (tag) tag.dataset.dragging = '1';
@@ -88,7 +102,11 @@ export function attachInput(container: HTMLElement, bound: BoundObject[]) {
     const obj = drag.obj;
     // Apply release velocity so the object flings.
     Matter.Body.setVelocity(obj.body, {x: drag.vx * 0.8, y: drag.vy * 0.8});
-    obj.el.releasePointerCapture?.(e.pointerId);
+    // Only release if we captured — capture is set lazily after the drag
+    // threshold, so a pure click never owns the pointer in the first place.
+    if (wasMoved && obj.el.hasPointerCapture?.(e.pointerId)) {
+      obj.el.releasePointerCapture(e.pointerId);
+    }
     drag = null;
 
     if (wasMoved) {
