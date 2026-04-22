@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check",
+    "check:hover": "node scripts/check-hover-rules.mjs",
     "lint": "eslint 'src/**/*.{js,ts,astro}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,ts,astro}'",
     "format": "prettier --write 'src/**/*.{js,ts,astro,css,md,json}' 'content/**/*.md' --config ./.prettierrc.json"
