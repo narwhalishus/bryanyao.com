@@ -51,32 +51,23 @@
     filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.65));
     transition: transform var(--dur-med) var(--ease-out-soft);
   }
+  .vinyl:hover,
+  .vinyl:focus-visible {
+    transform: rotate(8deg);
+  }
   .vinyl svg {
     width: 100%;
     height: 100%;
     display: block;
-    transform-origin: 50% 50%;
-  }
-  .vinyl:hover svg,
-  .vinyl:focus-visible svg,
-  .vinyl svg:hover {
-    animation: vinyl-spin 4s linear infinite;
-  }
-
-  @keyframes vinyl-spin {
-    to {
-      transform: rotate(360deg);
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .vinyl {
       transition: none;
     }
-    .vinyl:hover svg,
-    .vinyl:focus-visible svg,
-    .vinyl svg:hover {
-      animation: none;
+    .vinyl:hover,
+    .vinyl:focus-visible {
+      transform: none;
     }
   }
 </style>
