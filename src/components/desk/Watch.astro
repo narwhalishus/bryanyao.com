@@ -51,7 +51,9 @@
     <!-- hands: hour, minute, seconds (GS-style blued seconds) -->
     <line x1="80" y1="80" x2="80" y2="46" stroke="#ece1c8" stroke-width="3" stroke-linecap="round" />
     <line x1="80" y1="80" x2="108" y2="80" stroke="#ece1c8" stroke-width="2" stroke-linecap="round" />
-    <line x1="80" y1="80" x2="80" y2="36" stroke="#3055a5" stroke-width="1" stroke-linecap="round" />
+    <g class="watch-seconds">
+      <line x1="80" y1="80" x2="80" y2="36" stroke="#3055a5" stroke-width="1" stroke-linecap="round" />
+    </g>
 
     <circle cx="80" cy="80" r="2.4" fill="#ece1c8" />
 
@@ -78,6 +80,20 @@
     display: block;
   }
 
+  .watch-seconds {
+    transform-origin: 80px 80px;
+  }
+  .watch:hover .watch-seconds,
+  .watch:focus-visible .watch-seconds {
+    animation: seconds-sweep 60s linear infinite;
+  }
+
+  @keyframes seconds-sweep {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .watch {
       transition: none;
@@ -85,6 +101,10 @@
     .watch:hover,
     .watch:focus-visible {
       transform: none;
+    }
+    .watch:hover .watch-seconds,
+    .watch:focus-visible .watch-seconds {
+      animation: none;
     }
   }
 </style>
