@@ -29,7 +29,6 @@ const OBJECT_SHAPES: Record<string, ShapeSpec> = {
   'working-on': {shape: 'rect', density: 0.0009, frictionAir: 0.08, restitution: 0.18},
   watch: {shape: 'circle', density: 0.004, frictionAir: 0.09, restitution: 0.2},
   vinyl: {shape: 'circle', density: 0.0022, frictionAir: 0.06, restitution: 0.22},
-  'chalk-bag': {shape: 'rect', density: 0.0028, frictionAir: 0.11, restitution: 0.15},
   cufflinks: {shape: 'rect', density: 0.0018, frictionAir: 0.1, restitution: 0.2},
 };
 
