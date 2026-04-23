@@ -1,62 +1,223 @@
 ---
-// Grand Seiko SBGA227 placeholder. Opens a "watch" drawer with date/location.
-// Dial is a restrained stand-in — not a detailed SBGA227 rendering.
+// Grand Seiko SBGA227 — black sunburst dial, champagne applied markers, blued
+// seconds, Spring Drive power-reserve at ~8 o'clock. Zaratsu-polished case.
+// Hands staged at 10:10 so the GS monogram, date, and power reserve are all
+// readable. Seconds hand points to 12 (static — sweep animation is deferred).
 ---
 
-<button class="watch" data-obj="watch" data-drawer="watch" aria-label="Grand Seiko SBGA227">
-  <svg viewBox="0 0 160 160" aria-hidden="true">
+<button class='watch' data-obj='watch' data-drawer='watch' aria-label='Grand Seiko SBGA227'>
+  <svg viewBox='0 0 160 160' aria-hidden='true'>
     <defs>
-      <radialGradient id="case" cx="50%" cy="45%" r="55%">
-        <stop offset="0%" stop-color="#f0f0f2" />
-        <stop offset="55%" stop-color="#b8b8bc" />
-        <stop offset="100%" stop-color="#6a6a6e" />
-      </radialGradient>
-      <radialGradient id="dial" cx="50%" cy="45%" r="70%">
-        <stop offset="0%" stop-color="#0e1a14" />
-        <stop offset="70%" stop-color="#15241c" />
-        <stop offset="100%" stop-color="#040806" />
+      <!-- Zaratsu-polished case: diagonal specular band, not a soft radial -->
+      <linearGradient id='case-steel' x1='0%' y1='0%' x2='100%' y2='100%'>
+        <stop offset='0%' stop-color='#e9eaec' />
+        <stop offset='30%' stop-color='#babdc2' />
+        <stop offset='50%' stop-color='#8a8d92' />
+        <stop offset='70%' stop-color='#babdc2' />
+        <stop offset='100%' stop-color='#e9eaec' />
+      </linearGradient>
+      <!-- Rotated variant for the inner polished bezel ring -->
+      <linearGradient id='bezel-steel' x1='0%' y1='100%' x2='100%' y2='0%'>
+        <stop offset='0%' stop-color='#d8dade' />
+        <stop offset='50%' stop-color='#7c7f84' />
+        <stop offset='100%' stop-color='#d8dade' />
+      </linearGradient>
+      <!-- Hand facets: champagne with a dark mid-line so the dauphine reads -->
+      <linearGradient id='hand-champagne' x1='0%' y1='0%' x2='100%' y2='0%'>
+        <stop offset='0%' stop-color='#f2e4b8' />
+        <stop offset='50%' stop-color='#b59a58' />
+        <stop offset='100%' stop-color='#f2e4b8' />
+      </linearGradient>
+      <!-- Crown: dimensional gradient along the crown axis -->
+      <linearGradient id='crown-steel' x1='0%' y1='0%' x2='100%' y2='0%'>
+        <stop offset='0%' stop-color='#9a9da2' />
+        <stop offset='50%' stop-color='#e0e2e6' />
+        <stop offset='100%' stop-color='#6e7074' />
+      </linearGradient>
+      <!-- Inner bezel shadow — a thin dark ring where dial meets bezel -->
+      <radialGradient id='bezel-inner-shadow' cx='50%' cy='50%' r='50%'>
+        <stop offset='85%' stop-color='#000' stop-opacity='0' />
+        <stop offset='100%' stop-color='#000' stop-opacity='0.55' />
       </radialGradient>
     </defs>
 
-    <!-- case -->
-    <circle cx="80" cy="80" r="72" fill="url(#case)" />
-    <circle cx="80" cy="80" r="66" fill="#2a2a2d" />
-    <!-- dial -->
-    <circle cx="80" cy="80" r="62" fill="url(#dial)" />
+    <!-- ================= CASE ================= -->
+    <!-- Outer case: Zaratsu specular band -->
+    <circle cx='80' cy='80' r='74' fill='url(#case-steel)' />
+    <!-- Mid-case shadow separating lug-flank from bezel -->
+    <circle cx='80' cy='80' r='70' fill='#4a4d52' />
+    <!-- Polished bezel ring (rotated gradient for a second highlight) -->
+    <circle cx='80' cy='80' r='68' fill='url(#bezel-steel)' />
+    <!-- Thin dark step into the dial well -->
+    <circle cx='80' cy='80' r='64' fill='#18181a' />
 
-    <!-- hour markers (12 of them) -->
-    <g stroke="#ece1c8" stroke-width="1.8" stroke-linecap="round">
-      <line x1="80" y1="24" x2="80" y2="32" />
-      <line x1="108" y1="29.5" x2="104" y2="36.5" />
-      <line x1="131" y1="52" x2="124" y2="56" />
-      <line x1="136" y1="80" x2="128" y2="80" />
-      <line x1="131" y1="108" x2="124" y2="104" />
-      <line x1="108" y1="131" x2="104" y2="124" />
-      <line x1="80" y1="136" x2="80" y2="128" />
-      <line x1="52" y1="131" x2="56" y2="124" />
-      <line x1="29" y1="108" x2="36" y2="104" />
-      <line x1="24" y1="80" x2="32" y2="80" />
-      <line x1="29" y1="52" x2="36" y2="56" />
-      <line x1="52" y1="29.5" x2="56" y2="36.5" />
+    <!-- ================= DIAL ================= -->
+    <!-- Dial base -->
+    <circle cx='80' cy='80' r='62' fill='#08080a' />
+    <!-- Sunburst rays: 36 thin radial lines at low opacity.
+         Each ray is 10° apart; drawn from r=6 to r=62 so the center stays clean. -->
+    <g stroke='#2c2c30' stroke-width='0.6' opacity='0.5'>
+      <line x1='80' y1='74' x2='80' y2='18' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(10 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(20 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(30 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(40 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(50 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(60 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(70 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(80 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(90 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(100 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(110 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(120 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(130 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(140 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(150 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(160 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(170 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(180 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(190 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(200 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(210 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(220 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(230 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(240 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(250 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(260 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(270 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(280 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(290 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(300 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(310 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(320 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(330 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(340 80 80)' />
+      <line x1='80' y1='74' x2='80' y2='18' transform='rotate(350 80 80)' />
+    </g>
+    <!-- Inner bezel shadow ring (soft dark vignette at dial edge) -->
+    <circle cx='80' cy='80' r='62' fill='url(#bezel-inner-shadow)' />
+
+    <!-- ================= APPLIED INDICES ================= -->
+    <!-- Dauphine-style faceted markers. Each is a kite polygon with a
+         champagne fill and a thin darker centerline for the facet break.
+         Marker extends from outer r≈56 to inner r≈46, centered on its angle.
+         12 gets a double; 3 is omitted (date aperture). -->
+    <g>
+      <!-- 12 (doubled) -->
+      <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+      <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      <polygon points='72.5,24 73.6,45 75.2,46.8 76.8,45 77.4,24' fill='#ece1c8' />
+      <polygon points='82.6,24 83.2,45 84.8,46.8 86.4,45 87.5,24' fill='#ece1c8' />
+
+      <!-- 1 -->
+      <g transform='rotate(30 80 80)'>
+        <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+        <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      </g>
+      <!-- 2 -->
+      <g transform='rotate(60 80 80)'>
+        <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+        <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      </g>
+      <!-- 3 omitted — date aperture -->
+      <!-- 4 -->
+      <g transform='rotate(120 80 80)'>
+        <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+        <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      </g>
+      <!-- 5 -->
+      <g transform='rotate(150 80 80)'>
+        <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+        <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      </g>
+      <!-- 6 -->
+      <g transform='rotate(180 80 80)'>
+        <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+        <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      </g>
+      <!-- 7 -->
+      <g transform='rotate(210 80 80)'>
+        <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+        <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      </g>
+      <!-- 8 omitted — power reserve indicator -->
+      <!-- 9 -->
+      <g transform='rotate(270 80 80)'>
+        <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+        <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      </g>
+      <!-- 10 -->
+      <g transform='rotate(300 80 80)'>
+        <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+        <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      </g>
+      <!-- 11 -->
+      <g transform='rotate(330 80 80)'>
+        <polygon points='77.2,24 78,46 80,48 82,46 82.8,24' fill='#ece1c8' />
+        <line x1='80' y1='24' x2='80' y2='46' stroke='#7a6a2e' stroke-width='0.4' />
+      </g>
     </g>
 
-    <!-- GS logo block -->
-    <text x="80" y="62" text-anchor="middle" font-family="GFS Didot, Georgia, serif" font-size="6" letter-spacing="2.5" fill="#ece1c8">GS</text>
-    <text x="80" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="3.4" letter-spacing="1.6" fill="#ece1c8" opacity="0.75">Spring Drive</text>
+    <!-- ================= BRANDING =================
+         Text sits just below the 12 markers (which end at y=48) and above
+         the hand-sweep zone. "Spring Drive" sits above 6 with clearance. -->
+    <text x='80' y='56' text-anchor='middle' font-family='GFS Didot, Georgia, serif' font-size='5.4' letter-spacing='2.4' fill='#ece1c8'>GS</text>
+    <text x='80' y='63' text-anchor='middle' font-family='Inter, sans-serif' font-size='2.2' letter-spacing='0.5' fill='#ece1c8' opacity='0.85'>GRAND SEIKO</text>
+    <text x='80' y='104' text-anchor='middle' font-family='Inter, sans-serif' font-size='2.6' letter-spacing='0.7' fill='#ece1c8' opacity='0.75'>Spring Drive</text>
 
-    <!-- date window -->
-    <rect x="108" y="76" width="14" height="9" fill="#ece1c8" stroke="#6a6a6e" stroke-width="0.4" />
-    <text x="115" y="83" text-anchor="middle" font-family="Inter, sans-serif" font-size="6" fill="#15241c">17</text>
+    <!-- ================= DATE APERTURE (3 o'clock) ================= -->
+    <rect x='110' y='75.5' width='13' height='9' fill='#f4efe2' stroke='#6a6a6e' stroke-width='0.5' />
+    <text x='116.5' y='82.6' text-anchor='middle' font-family='Inter, sans-serif' font-size='6' font-weight='500' fill='#0a0a0c'>17</text>
 
-    <!-- hands: hour, minute, seconds (GS-style blued seconds) -->
-    <line x1="80" y1="80" x2="80" y2="46" stroke="#ece1c8" stroke-width="3" stroke-linecap="round" />
-    <line x1="80" y1="80" x2="108" y2="80" stroke="#ece1c8" stroke-width="2" stroke-linecap="round" />
-    <line x1="80" y1="80" x2="80" y2="36" stroke="#3055a5" stroke-width="1" stroke-linecap="round" />
+    <!-- ================= POWER RESERVE (~8 o'clock) ================= -->
+    <!-- Arc from ~7:30 to ~8:30 position, centered on 8 o'clock.
+         Center of sub-dial: (52, 108). Arc radius ~8 around it. -->
+    <g transform='translate(52 108)'>
+      <!-- Subdial recess ring -->
+      <circle cx='0' cy='0' r='9' fill='none' stroke='#1a1a1d' stroke-width='0.6' />
+      <!-- Power reserve arc: 120° span, champagne stroke -->
+      <path d='M -6.93 -4 A 8 8 0 0 1 6.93 -4' fill='none' stroke='#b59a58' stroke-width='0.7' stroke-linecap='round' />
+      <!-- 5 ticks along the arc -->
+      <g stroke='#ece1c8' stroke-width='0.5' stroke-linecap='round'>
+        <line x1='-6.93' y1='-4' x2='-5.2' y2='-3' />
+        <line x1='-4' y1='-6.93' x2='-3' y2='-5.2' />
+        <line x1='0' y1='-8' x2='0' y2='-6' />
+        <line x1='4' y1='-6.93' x2='3' y2='-5.2' />
+        <line x1='6.93' y1='-4' x2='5.2' y2='-3' />
+      </g>
+      <!-- Pointer (full-charge, pointing ~right along the arc) -->
+      <polygon points='0,0 4.6,-5.2 5.6,-4.4' fill='#ece1c8' />
+      <circle cx='0' cy='0' r='0.9' fill='#b59a58' />
+    </g>
 
-    <circle cx="80" cy="80" r="2.4" fill="#ece1c8" />
+    <!-- ================= HANDS (10:10) ================= -->
+    <!-- Minute hand: long dauphine. 10:10 → minute at 2 → +60° from 12.
+         Tip at y=34 keeps it short of the 2 marker's inner edge (y=46).
+         No tail past pivot — classic dauphine. -->
+    <g transform='rotate(60 80 80)'>
+      <polygon points='78.6,80 80,34 81.4,80' fill='url(#hand-champagne)' stroke='#7a6a2e' stroke-width='0.3' />
+    </g>
+    <!-- Hour hand: shorter dauphine. 10:10 → hour near 10 → -60° from 12.
+         Tip at y=50 keeps it well clear of the GS/GRAND SEIKO text at y=56–63. -->
+    <g transform='rotate(-60 80 80)'>
+      <polygon points='78.2,80 80,50 81.8,80' fill='url(#hand-champagne)' stroke='#7a6a2e' stroke-width='0.3' />
+    </g>
+    <!-- Seconds hand: blued steel, points to 12. Counterweight past pivot. -->
+    <line x1='80' y1='86' x2='80' y2='32' stroke='#1c3b8a' stroke-width='0.8' stroke-linecap='round' />
+    <circle cx='80' cy='86' r='1.6' fill='#1c3b8a' />
+    <!-- Center pinion -->
+    <circle cx='80' cy='80' r='2.2' fill='#ece1c8' stroke='#7a6a2e' stroke-width='0.3' />
 
-    <!-- crown -->
-    <rect x="143" y="74" width="9" height="12" rx="1.5" fill="url(#case)" stroke="#4a4a4e" stroke-width="0.4" />
+    <!-- ================= CROWN ================= -->
+    <!-- Spring bar suggestion -->
+    <line x1='141' y1='80' x2='146' y2='80' stroke='#2a2a2d' stroke-width='0.6' />
+    <rect x='144' y='74' width='8' height='12' rx='1.5' fill='url(#crown-steel)' stroke='#4a4a4e' stroke-width='0.4' />
+    <!-- Crown knurl lines -->
+    <g stroke='#4a4a4e' stroke-width='0.3'>
+      <line x1='145' y1='76' x2='151' y2='76' />
+      <line x1='145' y1='80' x2='151' y2='80' />
+      <line x1='145' y1='84' x2='151' y2='84' />
+    </g>
   </svg>
 </button>
 
