@@ -229,6 +229,7 @@
     filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.55));
     transition: transform var(--dur-short) var(--ease-out-soft);
   }
+  /* Inert on the desk while physics is active — suppressed by the .obj *:hover guard in global.css (PR #17). Kept for non-physics contexts. */
   .watch:hover,
   .watch:focus-visible {
     transform: scale(1.03);
