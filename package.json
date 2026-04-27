@@ -15,7 +15,7 @@
     "format": "prettier --write 'src/**/*.{js,ts,astro,css,md,json}' 'content/**/*.md' --config ./.prettierrc.json"
   },
   "dependencies": {
-    "astro": "^6.1.8",
+    "astro": "^6.1.9",
     "matter-js": "^0.20.0"
   },
   "devDependencies": {
